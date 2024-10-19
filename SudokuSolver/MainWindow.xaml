@@ -1,0 +1,30 @@
+﻿<Window x:Class="SudokuSolver.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:local="clr-namespace:SudokuSolver"
+        xmlns:controls="clr-namespace:SudokuSolver.Controls"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sudoku Solver" Height="600" Width="600">
+    <Grid>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Solve" Click="SolveButton_Click" Width="100" Margin="5"/>
+                <Button Content="Reset" Click="ResetButton_Click" Width="100" Margin="5"/>
+            </StackPanel>
+            <ScrollViewer>
+                <!-- Основная сетка для размещения клеток -->
+                <ItemsControl ItemsSource="{Binding Cells}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="9" Columns="9"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:CellControl Cell="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -7,6 +7,7 @@
     <UserControl.Resources>
         <converters:BorderThicknessConverter x:Key="BorderThicknessConverter"/>
         <converters:ZeroToVisibilityConverter x:Key="ZeroToVisibilityConverter"/>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
     </UserControl.Resources>
     <Border BorderBrush="Black"
             BorderThickness="{Binding CellIndex, Converter={StaticResource BorderThicknessConverter}}">
@@ -18,11 +19,15 @@
                      HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Center"
                      MaxLength="1"
-                     Panel.ZIndex="1"/>
+                     Panel.ZIndex="1"
+                     IsReadOnly="{Binding IsNotesMode, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                     IsHitTestVisible="{Binding IsNotesMode, Converter={StaticResource InverseBooleanConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <!-- Отображение потенциальных значений -->
             <ItemsControl ItemsSource="{Binding PotentialValues}"
                           Visibility="{Binding CurrentValue, Converter={StaticResource ZeroToVisibilityConverter}}"
-                          Panel.ZIndex="0">
+                          Panel.ZIndex="0"
+                          IsHitTestVisible="{Binding IsNotesMode, RelativeSource={RelativeSource AncestorType=UserControl}}">
+
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Rows="3" Columns="3"/>
@@ -33,7 +38,8 @@
                         <TextBlock Text="{Binding}"
                                    FontSize="8"
                                    HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center"
+                                   MouseLeftButtonDown="PotentialValue_MouseLeftButtonDown"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

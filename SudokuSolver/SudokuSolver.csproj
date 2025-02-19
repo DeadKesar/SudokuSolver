@@ -56,8 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BorderThicknessConverter.cs" />
+    <Compile Include="InverseBooleanConverter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="SudokuSolverCore.cs" />
+    <Compile Include="ZeroToBooleanConverter.cs" />
     <Compile Include="ZeroToVisibilityConverter.cs" />
     <Page Include="CellControl.xaml">
       <SubType>Designer</SubType>

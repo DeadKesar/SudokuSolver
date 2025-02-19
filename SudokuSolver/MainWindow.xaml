@@ -4,11 +4,16 @@
         xmlns:controls="clr-namespace:SudokuSolver.Controls"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Sudoku Solver" Height="600" Width="600">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Grid>
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                 <Button Content="Solve" Click="SolveButton_Click" Width="100" Margin="5"/>
                 <Button Content="Reset" Click="ResetButton_Click" Width="100" Margin="5"/>
+                <Button Content="Recalculate" Click="RecalculateButton_Click" Width="100" Margin="5"/>
+                <ToggleButton Content="Notes Mode" IsChecked="{Binding IsNotesMode}" Width="100" Margin="5"/>
             </StackPanel>
             <ScrollViewer>
                 <!-- Основная сетка для размещения клеток -->
@@ -20,7 +25,8 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <controls:CellControl Cell="{Binding}" />
+                            <controls:CellControl Cell="{Binding}"
+                                                  IsNotesMode="{Binding IsNotesMode, RelativeSource={RelativeSource AncestorType=Window}}"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
